@@ -1,74 +1,88 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { useEffect, useState, useCallback } from 'react';
+import { Text, View, Image, StyleSheet } from 'react-native';
+import { useRouter, usePathname } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import Entypo from '@expo/vector-icons/Entypo';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+SplashScreen.preventAutoHideAsync();
 
-export default function HomeScreen() {
+export default function SplashScreenComponent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync(Entypo.font);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady && pathname === '/') { // Only navigate from the splash screen
+      SplashScreen.hideAsync();
+      setTimeout(() => {
+        router.push('/sign_in'); // Navigate to sign-in page
+      }, 4000); // Show splash screen for 4 seconds
+    }
+  }, [appIsReady, router, pathname]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container} onLayout={onLayoutRootView}>
+      <Image
+        source={require('../../assets/images/image.png')}
+        style={styles.logo}
+      />
+      <Text style={styles.text}>gojek</Text>
+      <View style={styles.bottomTextContainer}>
+        <Text style={styles.subtitle}>from</Text>
+        <Text style={styles.company}>goto</Text>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  text: {
+    fontSize: 45,
+    fontWeight: 'bold',
+    color: '#444',
+    marginBottom: 40,
+  },
+  bottomTextContainer: {
     position: 'absolute',
+    bottom: 30,
+    alignItems: 'center',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#888',
+  },
+  company: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2EAD33',
   },
 });
