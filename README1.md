@@ -40,4 +40,4 @@ This project is a multi-page application built using React Native with Expo Rout
 
 ### Final Flow
 
-Splash Screen → Sign-In → Add Number & Nationality → Choose OTP Method → Enter OTP
+Splash Screen → Sign-In → Add Number & Nationality → Choose OTP Method → Enter OTP.
