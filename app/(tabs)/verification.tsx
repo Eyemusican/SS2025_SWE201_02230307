@@ -16,27 +16,37 @@ function OTPVerificationScreen() {
     <View style={styles.container}>
       <Pressable style={styles.backButton} onPress={() => router.push('/task')}>
         <Image 
-          source={{ uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//download%20(1).png" }} 
-          style={styles.backIcon} 
+          source={require("@/assets/images/download (1).png")} 
+          style={styles.backIcon}  
         />
       </Pressable>
 
       <Text style={styles.header}>Choose verification method</Text>
       
       <Pressable style={styles.optionButton} onPress={() => handleNavigation("E-Mail")}>
-        <Image source={{ uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//gmail-removebg-preview.png" }} style={styles.icon} />
+        <Image
+          source={require("@/assets/images/gmail-removebg-preview.png")} 
+          style={styles.icon}
+        />
+
         <Text style={styles.optionText}>OTP via E-mail</Text>
         <Text style={styles.arrow}>&gt;</Text>
       </Pressable>
       
       <Pressable style={styles.optionButton} onPress={() => handleNavigation("WhatsApp")}>
-        <Image source={{ uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//whatsapp-removebg-preview.png" }} style={styles.icon} />
+        <Image 
+          source={require("@/assets/images/whatsapp-removebg-preview.png")} 
+          style={styles.icon}
+        />
         <Text style={styles.optionText}>OTP via WhatsApp</Text>
         <Text style={styles.arrow}>&gt;</Text>
       </Pressable>
       
       <Pressable style={styles.optionButton} onPress={() => handleNavigation("SMS")}>
-        <Image source={{ uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//SMS-removebg-preview.png" }} style={styles.icon} />
+        <Image  
+          source={require("@/assets/images/SMS-removebg-preview.png")} 
+          style={styles.icon}
+        />
         <Text style={styles.optionText}>OTP via SMS</Text>
         <Text style={styles.arrow}>&gt;</Text>
       </Pressable>

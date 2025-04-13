@@ -21,7 +21,7 @@ function PhoneNumberScreen() {
       
       <View style={styles.phoneInputContainer}>
         <Pressable style={styles.flagButton}>
-          <Image source={{ uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//download.png" }} style={styles.flagImage} />
+          <Image source={require('@/assets/images/download.png')} style={styles.flagImage} />
           <Text style={styles.flagText}>+975</Text>
         </Pressable>
         <TextInput

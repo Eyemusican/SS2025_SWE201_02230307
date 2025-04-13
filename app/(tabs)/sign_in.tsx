@@ -5,9 +5,9 @@ import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated
 import { useRouter } from 'expo-router';
 
 const data = [
-    { id: 1, image: { uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//Slide1-removebg-preview.png" }, text: "Get going with us" },
-    { id: 2, image: { uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//Slide2-removebg-preview.png" }, text: "Welcome to Gojek!" },
-    { id: 3, image: { uri: "https://ntoeyrlnovukknrzwvoz.supabase.co/storage/v1/object/public/Tenzin//Slide3-removebg-preview.png" }, text: "Rides for all" },
+  { id: 1, image: require('@/assets/images/Slide1-removebg-preview.png'), text: "Get going with us" },
+  { id: 2, image: require('@/assets/images/Slide2-removebg-preview.png'), text: "Welcome to Gojek!" },
+  { id: 3, image: require('@/assets/images/Slide3-removebg-preview.png'), text: "Rides for all" },
 ];
 
 const { width, height } = Dimensions.get("window");
