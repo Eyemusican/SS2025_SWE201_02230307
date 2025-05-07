@@ -13,9 +13,9 @@ export interface TodoResponse {
   error: any;
 }
 
-/**
- * Todo service - handles all Supabase interactions for todos
- */
+
+// Todo service - handles all Supabase interactions for todos
+ 
 export const todoService = {
   async addTodo(todo: Omit<Todo, 'id' | 'created_at'>): Promise<TodoResponse> {
     const { data, error } = await supabase
